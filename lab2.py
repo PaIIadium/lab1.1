@@ -28,10 +28,14 @@ def calc_w_pkn(p, k, n):
 
 def discrete_fourier_transform(signal):
     result = np.zeros(len(signal), dtype=np.complex)
+    wpk_table = np.zeros((len(signal), len(signal)), dtype=np.complex)
     for p in range(len(signal)):
         for k in range(len(signal)):
             w = calc_w_pkn(p, k, len(signal))
+            wpk_table[p][k] = w
             result[p] += w * signal[k]
+    for p in range(len(wpk_table)):
+        print(p, wpk_table[p])
     return abs(result)
 
 
